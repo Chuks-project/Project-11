@@ -91,25 +91,25 @@ Note: Ansible uses TCP port 22 by default, which means it needs to ssh into targ
 
 - Update your inventory/dev.yml file with this snippet of code:
   
-```                                                                `
-    [nfs]
-   <NFS-Server-Private-IP-Address> ansible_ssh_user='ec2-user'
+   ```                                                                `
+       [nfs]
+       <NFS-Server-Private-IP-Address> ansible_ssh_user='ec2-user'
 
-   [webservers]
-   <Web-Server1-Private-IP-Address> ansible_ssh_user='ec2-user'
-   <Web-Server2-Private-IP-Address> ansible_ssh_user='ec2-user'
+       [webservers]
+       <Web-Server1-Private-IP-Address> ansible_ssh_user='ec2-user'
+       <Web-Server2-Private-IP-Address> ansible_ssh_user='ec2-user'
 
-   [db]
-   <Database-Private-IP-Address> ansible_ssh_user='ec2-user' 
+       [db]
+       <Database-Private-IP-Address> ansible_ssh_user='ec2-user' 
 
-   [lb]
-   <Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu'  
+      [lb]
+      <Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu'  
 
-```  
+  ```  
       
       
       
-### CREATE A COMMON PLAYBOOK
+CREATE A COMMON PLAYBOOK
 
  Step 5 – Create a Common Playbook
 It is time to start giving Ansible the instructions on what you needs to be performed on all servers listed in inventory/dev.
@@ -119,7 +119,6 @@ It is time to start giving Ansible the instructions on what you needs to be perf
 - Update your playbooks/common.yml file with following code:
   
 
-```
 ---
 - name: update web, nfs and db servers
   hosts: webservers, nfs, db
@@ -146,21 +145,24 @@ It is time to start giving Ansible the instructions on what you needs to be perf
       apt:
         name: wireshark
         state: latest
+
 ```       
 
 
-     use git commands to add, commit and push your branch to GitHub.
+use git commands to add, commit and push your branch to GitHub.
 
+   ```
+    git status
 
+    git add <selected files>
 
-    `git status`
-
-     `git add <selected files>`
-
-      `git commit -m "commit message"`
+    git commit -m "commit message"
+   
+   ```   
       
-      
-      Create a Pull request (PR)
+   
+   
+- Create a Pull request (PR)
 
 - Wear a hat of another developer for a second, and act as a reviewer.
 
@@ -169,6 +171,7 @@ It is time to start giving Ansible the instructions on what you needs to be perf
 - Head back on your terminal, checkout from the feature branch into the master, and pull down the latest changes.
 
 - Once your code changes appear in master branch – Jenkins will do its job and save all the files (build artifacts) to            /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ directory on Jenkins-Ansible server.
+
 
 ![build one](https://user-images.githubusercontent.com/65022146/215465215-5b8f2aef-3485-4448-8cfa-bafde9fba56c.png)
 
@@ -179,12 +182,15 @@ It is time to start giving Ansible the instructions on what you needs to be perf
 
 - Now, it is time to execute ansible-playbook command and verify if your playbook actually works:
   
-    `cd ansible-config-mgt`
+```    
+    cd ansible-config-mgt
     
-    `ansible-playbook -i inventory/dev.yml playbooks/common.yml`
+    ansible-playbook -i inventory/dev.yml playbooks/common.yml
+
+```
     
-    
-    - If the ansible palybook is successful, you will see an output like the screenshot below:
+
+- If the ansible palybook is successful, you will see an output like the screenshot below:
     
     ![Ansible Playbook succesful2](https://user-images.githubusercontent.com/65022146/215464819-706385e9-c64f-4d6a-a897-a7ed7c5d5576.png)
 
