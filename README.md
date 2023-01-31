@@ -91,8 +91,9 @@ Note: Ansible uses TCP port 22 by default, which means it needs to ssh into targ
 
 - Update your inventory/dev.yml file with this snippet of code:
   
-   ```                                                                `
-       [nfs]
+   ```                                                                
+      
+      [nfs]
        <NFS-Server-Private-IP-Address> ansible_ssh_user='ec2-user'
 
        [webservers]
