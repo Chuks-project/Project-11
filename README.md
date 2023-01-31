@@ -118,7 +118,7 @@ It is time to start giving Ansible the instructions on what you needs to be perf
 
 - Update your playbooks/common.yml file with following code:
   
-
+```
 ---
 - name: update web, nfs and db servers
   hosts: webservers, nfs, db
